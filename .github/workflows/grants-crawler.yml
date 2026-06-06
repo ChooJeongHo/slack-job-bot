@@ -5,6 +5,9 @@ on:
     - cron: '10 3 * * 1-5'
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   crawl:
     runs-on: ubuntu-latest
@@ -28,4 +31,4 @@ jobs:
           git config user.name "GitHub Action"
           git add sent_grants.json
           git diff --staged --quiet || git commit -m "update: 발송 기록 업데이트"
-          git push
+          git diff --quiet HEAD origin/main || git push
