@@ -1,0 +1,31 @@
+name: 지원사업 공고 발송
+
+on:
+  schedule:
+    - cron: '10 3 * * 1-5'
+  workflow_dispatch:
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: 패키지 설치
+        run: pip install requests beautifulsoup4
+      - name: 이전 발송 기록 로드
+        run: cp sent_grants.json /tmp/ 2>/dev/null || true
+      - name: 지원사업 수집 및 발송
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: python grants_crawler.py
+      - name: 발송 기록 저장
+        run: |
+          cp /tmp/sent_grants.json sent_grants.json 2>/dev/null || true
+          git config user.email "action@github.com"
+          git config user.name "GitHub Action"
+          git add sent_grants.json
+          git diff --staged --quiet || git commit -m "update: 발송 기록 업데이트"
+          git push
