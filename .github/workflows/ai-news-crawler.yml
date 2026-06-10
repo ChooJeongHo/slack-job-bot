@@ -2,7 +2,7 @@ name: AI 뉴스 발송
 
 on:
   schedule:
-    - cron: '0 0 * * 1-5'  # 평일 오전 9시 (UTC 00:00)
+    - cron: '0 1 * * 1-5'  # 평일 오전 9시 (UTC 00:00)
   workflow_dispatch:
 
 permissions:
