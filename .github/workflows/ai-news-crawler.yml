@@ -1,0 +1,23 @@
+name: AI 뉴스 발송
+
+on:
+  schedule:
+    - cron: '0 0 * * 1-5'  # 평일 오전 9시 (UTC 00:00)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: AI 뉴스 수집 및 발송
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python ai_news_crawler.py
