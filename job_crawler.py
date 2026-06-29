@@ -7,14 +7,13 @@
 """
 
 import requests
-import os
 import json
 import time
 import random
 from datetime import datetime
 from bs4 import BeautifulSoup
 
-SLACK_WEBHOOK_URL = os.environ.get("SLACK_WEBHOOK_URL")
+SLACK_WEBHOOK_URL = "https://hooks.slack.com/services/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"
 JOBS_PER_DAY = 5
 
 HEADERS = {
