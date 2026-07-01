@@ -102,14 +102,23 @@ def crawl_saramin():
                     try:
                         title_el = item.select_one(".job_tit a")
                         company_el = item.select_one(".corp_name a")
-                        career_el = item.select_one(".career")  # 경력 전용 클래스
                         if not title_el:
                             continue
 
                         title = title_el.get_text(strip=True)
                         company = company_el.get_text(strip=True) if company_el else "미기재"
                         job_url = "https://www.saramin.co.kr" + title_el.get("href", "")
-                        career = career_el.get_text(strip=True) if career_el else "신입/초급"
+
+                        # 사람인 경력 파싱
+                        # .career 클래스는 존재하지 않음!
+                        # 실제 구조: .job_condition > span 들 중 경력 키워드 있는 것 추출
+                        # ex) <span>서울 서초구</span><span>경력5년↑</span><span>학력무관</span>
+                        cond_spans = item.select(".job_condition span")
+                        career = next(
+                            (s.get_text(strip=True) for s in cond_spans
+                             if any(k in s.get_text() for k in ["경력", "신입", "무관"])),
+                            "신입/초급"
+                        )
 
                         if not is_valid_career(career):
                             continue
