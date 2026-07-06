@@ -18,6 +18,6 @@ jobs:
           python-version: '3.11'
       - name: AI 뉴스 수집 및 발송
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          JOB_NEWS_WEBHOOK_URL: ${{ secrets.JOB_NEWS_WEBHOOK_URL }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python ai_news_crawler.py

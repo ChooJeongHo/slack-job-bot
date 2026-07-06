@@ -15,7 +15,7 @@ from datetime import datetime
 from bs4 import BeautifulSoup
 from collections import defaultdict
 
-SLACK_WEBHOOK_URL = os.environ.get("SLACK_WEBHOOK_URL")
+SLACK_WEBHOOK_URL = os.environ.get("JOB_NEWS_WEBHOOK_URL")  # 채용공고-뉴스 채널
 JOBS_PER_DAY = 5
 
 HEADERS = {

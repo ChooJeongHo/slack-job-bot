@@ -9,7 +9,7 @@ AI 최신 뉴스 크롤러 → Claude 요약 → 슬랙 발송
 import json, os, re, time, urllib.request, urllib.parse
 from datetime import datetime
 
-SLACK_WEBHOOK_URL = os.environ.get("SLACK_WEBHOOK_URL")
+SLACK_WEBHOOK_URL = os.environ.get("JOB_NEWS_WEBHOOK_URL")  # 채용공고-뉴스 채널
 ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY")
 
 # 검색 키워드
@@ -75,7 +75,6 @@ def summarize_with_claude(title, url):
 왜 중요한지, 어떤 점이 주목할만한지 간략히 설명해주세요.
 
 제목: {title}
-URL: {url}
 
 요약만 출력하세요. 다른 설명 없이."""
 

@@ -17,5 +17,5 @@ jobs:
         run: pip install requests beautifulsoup4
       - name: 채용공고 수집 및 발송
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          JOB_NEWS_WEBHOOK_URL: ${{ secrets.JOB_NEWS_WEBHOOK_URL }}
         run: python job_crawler.py
