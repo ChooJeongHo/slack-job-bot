@@ -22,7 +22,7 @@ jobs:
         run: cp sent_grants.json /tmp/ 2>/dev/null || true
       - name: 지원사업 수집 및 발송
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          JOB_NEWS_WEBHOOK_URL: ${{ secrets.JOB_NEWS_WEBHOOK_URL }}
         run: python grants_crawler.py
       - name: 발송 기록 저장
         run: |

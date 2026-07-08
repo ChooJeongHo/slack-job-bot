@@ -6,7 +6,7 @@ THE VC 지원사업 크롤러 → 슬랙 발송
 import json, os, re, time, urllib.request
 from datetime import datetime, date
 
-SLACK_WEBHOOK_URL = os.environ.get("SLACK_WEBHOOK_URL")
+SLACK_WEBHOOK_URL = os.environ.get("JOB_NEWS_WEBHOOK_URL")  # 채용공고-뉴스 채널
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
